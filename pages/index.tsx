@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { Form } from '../components'
 
 const availableIntegrations: string[] = [
   'Salesforce',
@@ -45,6 +45,8 @@ const Home: NextPage = () => {
         </div>
 
         <div className={styles.grid}>Build here</div>
+
+        <Form integration={selectedIntegration} />
       </main>
     </div>
   );
