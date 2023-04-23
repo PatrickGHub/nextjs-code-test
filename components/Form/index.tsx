@@ -1,4 +1,6 @@
-import styles from "./Form.module.css"
+import { FormEvent } from 'react'
+import axios from 'axios'
+import styles from './Form.module.css'
 
 interface IntegrationInterface {
   integration: 'Salesforce' | 'HubSpot' | 'Zapier'
@@ -12,9 +14,21 @@ const Form = ({integration}: IntegrationInterface) => {
       </div>
     )
   }
+  
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+
+    const response = await axios({
+      method: 'POST',
+      url: '/api/integrations',
+      data: JSON.stringify({test: 'aaa'})
+    })
+
+    console.log('\n---------- LOGGING response ----------\n', response)
+  }
 
   return (
-    <form action="">
+    <form onSubmit={handleSubmit}>
       <p>Editing integration: {integration}</p>
       <div
         className={styles.field}
@@ -31,6 +45,8 @@ const Form = ({integration}: IntegrationInterface) => {
           id='name'
         />
       </div>
+
+      <button type='submit'>Submit</button>
     </form>
   )
 }
