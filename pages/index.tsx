@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from 'axios'
 import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { Form } from '../components'
 
-const availableIntegrations: string[] = [
-  'Salesforce',
-  'HubSpot',
-  'Zapier'
-]
-
 const Home: NextPage = () => {
   const [selectedIntegration, setSelectedIntegration] = useState<string | null>(null)
+  const [integrationsData, setIntegrationsData] = useState()
+
+  useEffect(() => {
+    (
+      async () => {
+        const response = await axios({
+        method: 'GET',
+        url: '/api/integrations'
+      })
+
+      setIntegrationsData(response.data)
+    }
+  )()
+  }, [])
+
+  console.log('\n---------- LOGGING integrationsData ----------\n', integrationsData)
 
   return (
     <div className={styles.container}>
@@ -28,25 +39,44 @@ const Home: NextPage = () => {
 
         <p>Available integrations:</p>
 
-        <div className={styles.grid}>
-          {
-            availableIntegrations.map((integration) => {
-              return (
-                <div
-                  key={integration}
-                  className={styles.card}
-                  onClick={() => setSelectedIntegration(integration)}
-                >
-                  {integration}
-                </div>
-              )
-            })
-          }
-        </div>
+        {
+          integrationsData &&
+          <div>
+            <div className={styles.grid}>
+              {
+                Object.keys(integrationsData).map((integration) => {
+                  return (
+                    <div
+                      key={integration}
+                      className={styles.card}
+                      onClick={() => setSelectedIntegration(integration)}
+                    >
+                      {integration}
+                      {integrationsData[integration].connected &&
+                        <div>
+                          <p>Connected: Yes</p>
+                          <p>Disconnect</p>
+                        </div>
+                      }
+ 
+                      {!integrationsData[integration].connected &&
+                        <div>
+                          <p>Connected: No</p>
+                          <p>Connect</p>
+                        </div>
+                      }
+                    </div>
+                  )
+                })
+              }
+            </div>
 
-        <div className={styles.grid}>Build here</div>
+            <div className={styles.grid}>Build here</div>
+            <Form integration={selectedIntegration} />
+          </div>
+        }
 
-        <Form integration={selectedIntegration} />
+
       </main>
     </div>
   );
