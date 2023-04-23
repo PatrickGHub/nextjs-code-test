@@ -1,0 +1,63 @@
+{
+  "Salesforce": {
+    "connected": true,
+    "formFields": {
+      "client_id": {
+        "readableKey": "Client ID",
+        "key": "client_id",
+        "fieldType": "text",
+        "value": ""
+      },
+      "client_secret": {
+        "readableKey": "Client Secret",
+        "key": "client_secret",
+        "fieldType": "text",
+        "value": ""
+      }
+    }
+  },
+  "HubSpot": {
+    "connected": false,
+    "formFields": {
+      "api_key": {
+        "readableKey": "API Key",
+        "key": "api_key",
+        "fieldType": "text",
+        "value": ""
+      },
+      "client_secret": {
+        "readableKey": "Client Secret",
+        "key": "client_secret",
+        "fieldType": "text",
+        "value": ""
+      }
+    }
+  },
+  "Zapier": {
+    "connected": false,
+    "formFields": {
+      "tenant_domain": {
+        "readableKey": "Tenant Domain",
+        "key": "tenant_domain",
+        "fieldType": "text",
+        "value": ""
+      },
+      "client_id": {
+        "readableKey": "Client ID",
+        "key": "client_id",
+        "fieldType": "text",
+        "value": ""
+      },
+      "client_secret": {
+        "readableKey": "Client Secret",
+        "key": "client_secret",
+        "fieldType": "text",
+        "value": ""
+      },
+      "field_mappings": {
+        "readableKey": "Field Mappings",
+        "key": "field_mappings"
+      }
+    }
+  }
+}
