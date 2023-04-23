@@ -1,9 +1,18 @@
+import { useState } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
+const availableIntegrations: string[] = [
+  'Salesforce',
+  'HubSpot',
+  'Zapier'
+]
+
 const Home: NextPage = () => {
+  const [selectedIntegration, setSelectedIntegration] = useState<string | null>(null)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,6 +25,24 @@ const Home: NextPage = () => {
         <h1 className={styles.title}>Blinq</h1>
 
         <p className={styles.description}>Manage your integrations here</p>
+
+        <p>Available integrations:</p>
+
+        <div className={styles.grid}>
+          {
+            availableIntegrations.map((integration) => {
+              return (
+                <div
+                  key={integration}
+                  className={styles.card}
+                  onClick={() => setSelectedIntegration(integration)}
+                >
+                  {integration}
+                </div>
+              )
+            })
+          }
+        </div>
 
         <div className={styles.grid}>Build here</div>
       </main>
