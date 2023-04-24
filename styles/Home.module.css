@@ -112,6 +112,14 @@
   color: green;
 }
 
+.disconnected {
+  color: red;
+}
+
+.connectionButton {
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

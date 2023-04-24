@@ -1,4 +1,23 @@
 .field {
   display: grid;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+
+.label {
+  margin-bottom: .5em;
+}
+
+.submitButton {
+  cursor: pointer;
+  background-color: inherit;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0.5em 1em;
+}
+
+.submitButton:hover {
+  color: #0070f3;
+  border-color: #0070f3;
 }

@@ -64,7 +64,7 @@ const Form = ({integrationData, integration, setSelectedIntegration, handleDataR
         })
       }
 
-      <button type='submit'>Submit</button>
+      <button type='submit' className={styles.submitButton}>Submit</button>
     </form>
   )
 }

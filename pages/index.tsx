@@ -71,18 +71,29 @@ const Home: NextPage = () => {
                       key={integration}
                       className={styles.card}
                     >
-                      {integration}
+                      <h2>{integration}</h2>
+
                       {integrationsData[integration].connected &&
                         <div>
                           <p className={styles.connected}>Connected</p>
-                          <p onClick={(e) => handleDisconnect(e)} data-integration={integration}>Disconnect</p>
+                          <p
+                            onClick={(e) => handleDisconnect(e)} data-integration={integration}
+                            className={styles.connectionButton}
+                          >
+                            Disconnect
+                          </p>
                         </div>
                       }
  
                       {!integrationsData[integration].connected &&
                         <div>
-                          <p>Not connected</p>
-                          <p onClick={() => setSelectedIntegration(integration as EnabledIntegrations)}>Connect</p>
+                          <p className={styles.disconnected}>Not connected</p>
+                          <p
+                            onClick={() => setSelectedIntegration(integration as EnabledIntegrations)}
+                            className={styles.connectionButton}
+                          >
+                            Connect
+                          </p>
                         </div>
                       }
                     </div>
