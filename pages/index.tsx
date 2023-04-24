@@ -2,9 +2,9 @@ import { useCallback, useEffect, useState } from "react";
 import axios from 'axios'
 import type { NextPage } from "next";
 import Head from "next/head";
-import { EnabledIntegrations, IntegrationsData } from '../types/types'
 import styles from "../styles/Home.module.css";
-import { Form } from '../components'
+import { EnabledIntegrations, IntegrationsData } from '@/types'
+import { Form } from '@/components'
 
 const Home: NextPage = () => {
   const [selectedIntegration, setSelectedIntegration] = useState<EnabledIntegrations | null>(null)

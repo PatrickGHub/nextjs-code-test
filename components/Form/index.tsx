@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react'
 import axios from 'axios'
 import styles from './Form.module.css'
-import { EnabledIntegrations, SingleIntegrationData } from '../../types/types'
+import { EnabledIntegrations, SingleIntegrationData } from '@/types'
 
 interface FormInterface {
   integrationData: SingleIntegrationData
