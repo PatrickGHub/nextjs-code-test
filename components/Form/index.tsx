@@ -1,16 +1,14 @@
 import { FormEvent, useState } from 'react'
 import axios from 'axios'
 import styles from './Form.module.css'
+import { EnabledIntegrations, SingleIntegrationData } from '../../types/types'
 
-interface IntegrationInterface {
-  integrationData: {
-    connected: Boolean
-    formFields: Object
-  }
-  integration: 'Salesforce' | 'HubSpot' | 'Zapier'
+interface FormInterface {
+  integrationData: SingleIntegrationData
+  integration: EnabledIntegrations
 }
 
-const Form = ({integrationData, integration}: IntegrationInterface) => {
+const Form = ({integrationData, integration}: FormInterface) => {
   if (!integration) {
     return (
       <div>

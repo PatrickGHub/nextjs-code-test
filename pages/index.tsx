@@ -1,16 +1,17 @@
-import { EventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios'
 import type { NextPage } from "next";
 import Head from "next/head";
+import { IntegrationsData } from '../types/types'
 import styles from "../styles/Home.module.css";
 import { Form } from '../components'
 
 const Home: NextPage = () => {
   const [selectedIntegration, setSelectedIntegration] = useState<string | null>(null)
-  const [integrationsData, setIntegrationsData] = useState()
+  const [integrationsData, setIntegrationsData] = useState<IntegrationsData>()
 
-  const handleDisconnect = async (e) => {
-    const integration = e.target.getAttribute('data-integration')
+  const handleDisconnect = async (e: React.MouseEvent<HTMLParagraphElement>) => {
+    const integration = e.currentTarget.getAttribute('data-integration')
 
     return await axios({
       method: 'POST',
