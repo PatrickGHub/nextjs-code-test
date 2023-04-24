@@ -11,7 +11,14 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   const { integration } = _req.query
-  data[integration].connected = true
+  const formData = _req.body
+  
+  data[integration] = {
+    connected: true,
+    formFields: formData
+  }
+
+  console.log(JSON.stringify(data, null, 2))
   
   return res.status(200).json({ message: `${integration} connected` })
 }
