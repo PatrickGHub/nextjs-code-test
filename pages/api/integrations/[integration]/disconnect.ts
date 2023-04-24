@@ -11,7 +11,22 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   const { integration } = _req.query
-  data[integration].connected = false
-  
+
+  const updatedData = data[integration]
+
+  Object.keys(updatedData.formFields).map((formField) => {
+    updatedData.formFields[formField].value = ''
+  })
+
+
+  data[integration] = {
+    connected: false,
+    formFields: {
+      ...updatedData.formFields
+    }
+  }
+
+  console.log('Data updated with disconnection\n', JSON.stringify(data, null, 2))
+
   return res.status(200).json({ message: `${integration} disconnected` })
 }

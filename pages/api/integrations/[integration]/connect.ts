@@ -18,7 +18,8 @@ export default function handler(
     formFields: formData
   }
 
-  console.log(JSON.stringify(data, null, 2))
+
+  console.log('Data updated with connection\n', JSON.stringify(data, null, 2))
   
   return res.status(200).json({ message: `${integration} connected` })
 }

@@ -6,17 +6,11 @@ import { EnabledIntegrations, SingleIntegrationData } from '../../types/types'
 interface FormInterface {
   integrationData: SingleIntegrationData
   integration: EnabledIntegrations
+  setSelectedIntegration: Function
+  handleDataRefresh: Function
 }
 
-const Form = ({integrationData, integration}: FormInterface) => {
-  if (!integration) {
-    return (
-      <div>
-        Please select an integration
-      </div>
-    )
-  }
-
+const Form = ({integrationData, integration, setSelectedIntegration, handleDataRefresh}: FormInterface) => {
   const [formData, setFormData] = useState(integrationData.formFields)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +31,9 @@ const Form = ({integrationData, integration}: FormInterface) => {
       url: `/api/integrations/${integration}/connect`,
       data: formData
     })
+
+    await handleDataRefresh()
+    return setSelectedIntegration(null)
   }
 
   return (

@@ -10,6 +10,15 @@ const Home: NextPage = () => {
   const [selectedIntegration, setSelectedIntegration] = useState<EnabledIntegrations | null>(null)
   const [integrationsData, setIntegrationsData] = useState<IntegrationsData>()
 
+  const handleDataRefresh = async () => {
+    const updatedDataResponse = await axios({
+      method: 'GET',
+      url: '/api/integrations'
+    })
+
+    setIntegrationsData(updatedDataResponse.data)
+  }
+
   const handleDisconnect = async (e: React.MouseEvent<HTMLParagraphElement>) => {
     const integration = e.currentTarget.getAttribute('data-integration')
 
@@ -18,12 +27,7 @@ const Home: NextPage = () => {
       url: `/api/integrations/${integration}/disconnect`
     })
 
-    const updatedDataResponse = await axios({
-      method: 'GET',
-      url: '/api/integrations'
-    })
-
-    setIntegrationsData(updatedDataResponse.data)
+    return await handleDataRefresh()
   }
 
   useEffect(() => {
@@ -88,11 +92,18 @@ const Home: NextPage = () => {
             </div>
 
             <div className={styles.grid}>Build here</div>
-            {selectedIntegration && <Form integrationData={integrationsData[selectedIntegration]} integration={selectedIntegration} />}
+
+            {
+              selectedIntegration &&
+              <Form
+                integrationData={integrationsData[selectedIntegration]}
+                integration={selectedIntegration}
+                setSelectedIntegration={setSelectedIntegration}
+                handleDataRefresh={handleDataRefresh}
+              />
+            }
           </div>
         }
-
-
       </main>
     </div>
   );
