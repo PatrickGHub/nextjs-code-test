@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { EventHandler, useEffect, useState } from "react";
 import axios from 'axios'
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -8,6 +8,15 @@ import { Form } from '../components'
 const Home: NextPage = () => {
   const [selectedIntegration, setSelectedIntegration] = useState<string | null>(null)
   const [integrationsData, setIntegrationsData] = useState()
+
+  const handleDisconnect = async (e) => {
+    const integration = e.target.getAttribute('data-integration')
+
+    return await axios({
+      method: 'POST',
+      url: `/api/integrations/${integration}`
+    })
+  }
 
   useEffect(() => {
     (
@@ -20,7 +29,7 @@ const Home: NextPage = () => {
       setIntegrationsData(response.data)
     }
   )()
-  }, [])
+  }, [handleDisconnect])
 
   console.log('\n---------- LOGGING integrationsData ----------\n', integrationsData)
 
@@ -49,20 +58,19 @@ const Home: NextPage = () => {
                     <div
                       key={integration}
                       className={styles.card}
-                      onClick={() => setSelectedIntegration(integration)}
                     >
                       {integration}
                       {integrationsData[integration].connected &&
                         <div>
-                          <p>Connected: Yes</p>
-                          <p>Disconnect</p>
+                          <p className={styles.connected}>Connected</p>
+                          <p onClick={handleDisconnect} data-integration={integration}>Disconnect</p>
                         </div>
                       }
  
                       {!integrationsData[integration].connected &&
                         <div>
-                          <p>Connected: No</p>
-                          <p>Connect</p>
+                          <p>Not connected</p>
+                          <p onClick={() => setSelectedIntegration(integration)}>Connect</p>
                         </div>
                       }
                     </div>
