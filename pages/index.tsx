@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 
     return await axios({
       method: 'POST',
-      url: `/api/integrations/${integration}`
+      url: `/api/integrations/${integration}/disconnect`
     })
   }
 
@@ -29,7 +29,8 @@ const Home: NextPage = () => {
       setIntegrationsData(response.data)
     }
   )()
-  }, [handleDisconnect])
+  // }, [handleDisconnect])
+  }, [])
 
   console.log('\n---------- LOGGING integrationsData ----------\n', integrationsData)
 
@@ -80,7 +81,7 @@ const Home: NextPage = () => {
             </div>
 
             <div className={styles.grid}>Build here</div>
-            <Form integration={selectedIntegration} />
+            {selectedIntegration && <Form integrationData={integrationsData[selectedIntegration]} integration={selectedIntegration} />}
           </div>
         }
 
