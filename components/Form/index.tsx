@@ -52,7 +52,7 @@ const Form = ({integrationData, integration, setSelectedIntegration, handleDataR
 
   return (
     <form onSubmit={handleSubmit}>
-      <p>Adding integration for {integration}</p>
+      <p className={styles.p}>Adding integration for {integration}</p>
 
       {
         Object.keys(integrationData.formFields).map((formField) => {
@@ -60,7 +60,7 @@ const Form = ({integrationData, integration, setSelectedIntegration, handleDataR
           if (formField === 'field_mappings' && integrationData.formFields.field_mappings.fields) {
             return (
               <div key='field_mappings'>
-                <p>Map contact detail keys to new keys</p>
+                <p className={styles.p}>Map contact detail keys to new keys</p>
 
                 <FieldMappingForm
                   fields={integrationData.formFields.field_mappings.fields}
