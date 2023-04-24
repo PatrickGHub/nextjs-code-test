@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from 'axios'
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -13,10 +13,17 @@ const Home: NextPage = () => {
   const handleDisconnect = async (e: React.MouseEvent<HTMLParagraphElement>) => {
     const integration = e.currentTarget.getAttribute('data-integration')
 
-    return await axios({
+    await axios({
       method: 'POST',
       url: `/api/integrations/${integration}/disconnect`
     })
+
+    const updatedDataResponse = await axios({
+      method: 'GET',
+      url: '/api/integrations'
+    })
+
+    setIntegrationsData(updatedDataResponse.data)
   }
 
   useEffect(() => {
@@ -30,7 +37,6 @@ const Home: NextPage = () => {
       setIntegrationsData(response.data)
     }
   )()
-  // }, [handleDisconnect])
   }, [])
 
   console.log('\n---------- LOGGING integrationsData ----------\n', integrationsData)
@@ -65,7 +71,7 @@ const Home: NextPage = () => {
                       {integrationsData[integration].connected &&
                         <div>
                           <p className={styles.connected}>Connected</p>
-                          <p onClick={handleDisconnect} data-integration={integration}>Disconnect</p>
+                          <p onClick={(e) => handleDisconnect(e)} data-integration={integration}>Disconnect</p>
                         </div>
                       }
  
