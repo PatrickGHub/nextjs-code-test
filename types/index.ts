@@ -8,6 +8,9 @@ export interface SingleIntegrationData {
       key: string
       fieldType: string
       value: string
+      fields?: {
+        [key: string]: string
+      }
     }
   }
 }

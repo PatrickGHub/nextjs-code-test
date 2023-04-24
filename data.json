@@ -56,7 +56,15 @@
       },
       "field_mappings": {
         "readableKey": "Field Mappings",
-        "key": "field_mappings"
+        "key": "field_mappings",
+        "fields": {
+          "id": "",
+          "given_name": "",
+          "family_name": "",
+          "email": "",
+          "met_at_location": "",
+          "notes": ""
+        }
       }
     }
   }

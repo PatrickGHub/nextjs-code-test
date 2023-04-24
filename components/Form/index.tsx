@@ -36,12 +36,59 @@ const Form = ({integrationData, integration, setSelectedIntegration, handleDataR
     return setSelectedIntegration(null)
   }
 
+  const handleMappingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      field_mappings: {
+        ...formData.field_mappings,
+        fields: {
+          ...formData.field_mappings.fields,
+          [e.target.id]: e.target.value
+        }
+      }
+    })
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <p>Adding integration for {integration}</p>
 
       {
         Object.keys(integrationData.formFields).map((formField) => {
+
+          if (formField === 'field_mappings' && integrationData.formFields.field_mappings.fields) {
+            return (
+              <div key='field_mappings'>
+                <p>Map contact detail keys to new keys</p>
+
+                {
+                  Object.keys(integrationData.formFields.field_mappings.fields).map((mapping) => {
+                    return (
+                      <div
+                        key={mapping}
+                        className={styles.field}
+                      >
+                        <label
+                          htmlFor={mapping}
+                          className={styles.label}
+                        >
+                          {mapping}
+                        </label>
+    
+                        <input
+                          type='text'
+                          id={mapping}
+                          onChange={(e) => handleMappingChange(e)}
+                          required
+                        />
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            )
+          }
+
           return (
             <div
               key={formField}
@@ -58,6 +105,7 @@ const Form = ({integrationData, integration, setSelectedIntegration, handleDataR
                 type={integrationData.formFields[formField].fieldType}
                 id={integrationData.formFields[formField].key}
                 onChange={(e) => handleChange(e)}
+                required
               />
             </div>
           )
