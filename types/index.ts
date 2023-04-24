@@ -6,8 +6,8 @@ export interface SingleIntegrationData {
     [key: string]: {
       readableKey: string
       key: string
-      fieldType: string
-      value: string
+      fieldType?: string
+      value?: string
       fields?: {
         [key: string]: string
       }

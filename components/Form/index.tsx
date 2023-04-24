@@ -30,7 +30,10 @@ const Form = ({integrationData, integration, setSelectedIntegration, handleDataR
     await axios({
       method: 'POST',
       url: `/api/integrations/${integration}/connect`,
-      data: formData
+      data: {
+        formData,
+        integration
+      }
     })
 
     await handleDataRefresh()

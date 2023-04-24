@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { EnabledIntegrations } from '@/types'
 import data from '@/data'
 
 type Data = {
@@ -10,8 +11,8 @@ export default function handler(
   _req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { integration } = _req.query
-  const formData = _req.body
+  const integration: EnabledIntegrations = _req.body.integration
+  const formData = _req.body.formData
   
   data[integration] = {
     connected: true,

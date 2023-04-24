@@ -26,7 +26,8 @@ const Home: NextPage = () => {
 
     await axios({
       method: 'POST',
-      url: `/api/integrations/${integration}/disconnect`
+      url: `/api/integrations/${integration}/disconnect`,
+      data: { integration }
     })
 
     return await handleDataRefresh()

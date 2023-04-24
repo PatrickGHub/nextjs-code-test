@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { EnabledIntegrations, SingleIntegrationData } from '@/types'
 import data from '@/data'
 
 type Data = {
@@ -10,9 +11,9 @@ export default function handler(
   _req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { integration } = _req.query
+  const integration: EnabledIntegrations = _req.body.integration
 
-  const updatedData = data[integration]
+  const updatedData: SingleIntegrationData = data[integration]
 
   Object.keys(updatedData.formFields).map((formField) => {
     updatedData.formFields[formField].value = ''
