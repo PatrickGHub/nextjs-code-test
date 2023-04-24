@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import axios from 'axios'
 import type { NextPage } from "next";
 import Head from "next/head";
-import { IntegrationsData } from '../types/types'
+import { EnabledIntegrations, IntegrationsData } from '../types/types'
 import styles from "../styles/Home.module.css";
 import { Form } from '../components'
 
 const Home: NextPage = () => {
-  const [selectedIntegration, setSelectedIntegration] = useState<string | null>(null)
+  const [selectedIntegration, setSelectedIntegration] = useState<EnabledIntegrations | null>(null)
   const [integrationsData, setIntegrationsData] = useState<IntegrationsData>()
 
   const handleDisconnect = async (e: React.MouseEvent<HTMLParagraphElement>) => {
@@ -72,7 +72,7 @@ const Home: NextPage = () => {
                       {!integrationsData[integration].connected &&
                         <div>
                           <p>Not connected</p>
-                          <p onClick={() => setSelectedIntegration(integration)}>Connect</p>
+                          <p onClick={() => setSelectedIntegration(integration as EnabledIntegrations)}>Connect</p>
                         </div>
                       }
                     </div>

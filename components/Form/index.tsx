@@ -19,16 +19,15 @@ const Form = ({integrationData, integration}: FormInterface) => {
 
   const [formData, setFormData] = useState(integrationData.formFields)
 
-  const handleChange = (e: FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.target.id]: {
-        ...formData[e.target.id],
-        value: e.target.value
+      [e.currentTarget.id]: {
+        ...formData[e.currentTarget.id],
+        value: e.currentTarget.value
       }
     })
   }
-
   
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
