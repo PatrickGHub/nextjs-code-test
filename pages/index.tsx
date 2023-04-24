@@ -20,6 +20,8 @@ const Home: NextPage = () => {
   }
 
   const handleDisconnect = async (e: React.MouseEvent<HTMLParagraphElement>) => {
+    if (selectedIntegration) return
+
     const integration = e.currentTarget.getAttribute('data-integration')
 
     await axios({
