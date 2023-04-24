@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react'
 import axios from 'axios'
 import styles from './Form.module.css'
 import { EnabledIntegrations, SingleIntegrationData } from '@/types'
+import { FieldMappingForm } from '@/components'
 
 interface FormInterface {
   integrationData: SingleIntegrationData
@@ -61,30 +62,10 @@ const Form = ({integrationData, integration, setSelectedIntegration, handleDataR
               <div key='field_mappings'>
                 <p>Map contact detail keys to new keys</p>
 
-                {
-                  Object.keys(integrationData.formFields.field_mappings.fields).map((mapping) => {
-                    return (
-                      <div
-                        key={mapping}
-                        className={styles.field}
-                      >
-                        <label
-                          htmlFor={mapping}
-                          className={styles.label}
-                        >
-                          {mapping}
-                        </label>
-    
-                        <input
-                          type='text'
-                          id={mapping}
-                          onChange={(e) => handleMappingChange(e)}
-                          required
-                        />
-                      </div>
-                    )
-                  })
-                }
+                <FieldMappingForm
+                  fields={integrationData.formFields.field_mappings.fields}
+                  handleMappingChange={handleMappingChange}
+                />
               </div>
             )
           }
