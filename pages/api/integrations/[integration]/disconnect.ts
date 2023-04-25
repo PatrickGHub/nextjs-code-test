@@ -1,7 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { EnabledIntegrations, SingleIntegrationData } from '@/types'
-import data from '@/data'
+import { EnabledIntegrations, IntegrationsData, SingleIntegrationData } from '@/types'
+import untypedData from '@/data'
+
+const data: IntegrationsData = untypedData
 
 type Data = {
   message: string;
